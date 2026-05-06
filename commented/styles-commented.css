@@ -569,9 +569,9 @@ header nav {
   right: -100px;
   top: 50%;
   transform: translateY(-50%);
-  background: url('assets/images/Buho.webp') center/contain no-repeat;
   opacity: 0.05;
   z-index: -1;
+  pointer-events: none;
 }
 
 /* ═════════════════════════════════════════════════════════════════════════════════

@@ -252,14 +252,14 @@ header.nav-open .nav-toggle span::after { opacity: 0; }
 }
 .hero-bg-logo {
   position: absolute;
-  top: 10%;
-  right: -60px;
-  width: 520px;
-  height: 520px;
-  background: url('../assets/images/Buho.webp') center/contain no-repeat;
-  opacity: 0.04;
+  width: 400px;
+  height: 400px;
+  right: -100px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.05;
+  z-index: -1;
   pointer-events: none;
-  z-index: 0;
 }
 #hero .wrapper { position: relative; z-index: 1; }
 #hero .glow-blob:nth-child(1) {
