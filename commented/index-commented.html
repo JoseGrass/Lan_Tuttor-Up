@@ -972,49 +972,33 @@ function toggleFaq(el) {
 /* =========================
    🚀 HUBSPOT ULTRA LAZY (MEJORADO)
 ========================= */
+let hubspotLoaded = false;
+
 function loadHubspot() {
-  if (window.hubspotLoaded) return;
-  window.hubspotLoaded = true;
+  if (hubspotLoaded) return;
+  hubspotLoaded = true;
 
-  requestIdleCallback(() => {
-    const s1 = document.createElement("script");
-    s1.src = "https://js.hs-scripts.com/51296735.js";
-    s1.defer = true;
+  const s = document.createElement("script");
+  s.src = "https://js.hsforms.net/forms/embed/v2.js";
+  s.async = true;
 
-    const s2 = document.createElement("script");
-    s2.src = "https://js.hsforms.net/forms/embed/v2.js";
-    s2.defer = true;
+  s.onload = () => {
+    if (window.hbspt) {
+      hbspt.forms.create({
+        region: "na1",
+        portalId: "51296735",
+        formId: "98cd997f-f41b-462b-960c-1bbdf62d3bf1",
+        target: "#hbspt-cta"
+      });
+    }
+  };
 
-    document.body.appendChild(s1);
-    document.body.appendChild(s2);
-
-    s2.onload = () => {
-      if (window.hbspt) {
-        hbspt.forms.create({
-          region: "na1",
-          portalId: "51296735",
-          formId: "98cd997f-f41b-462b-960c-1bbdf62d3bf1",
-          target: "#hbspt-cta"
-        });
-      }
-    };
-  });
+  document.body.appendChild(s);
 }
 
-/* 👉 SOLO cargar cuando el usuario llegue al CTA */
-window.addEventListener('load', () => {
-  const cta = document.querySelector('#cta2');
-
-  if ('IntersectionObserver' in window && cta) {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        loadHubspot();
-        observer.disconnect();
-      }
-    }, { rootMargin: '200px' });
-
-    observer.observe(cta);
-  }
+/* 🔥 SOLO cuando el usuario interactúa */
+['click', 'scroll', 'mousemove', 'touchstart'].forEach(event => {
+  window.addEventListener(event, loadHubspot, { once: true });
 });
 
 /* =========================
