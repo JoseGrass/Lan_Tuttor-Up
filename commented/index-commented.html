@@ -999,20 +999,19 @@ function loadHubspot() {
 /* 👇 CLAVE: esperar a que TODO esté libre */
 window.addEventListener('load', () => {
   setTimeout(() => {
-    const cta = document.querySelector('#cta2');
+  const cta = document.querySelector('#cta2');
 
-    if ('IntersectionObserver' in window && cta) {
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          loadHubspot();
-          observer.disconnect();
-        }
-      }, { rootMargin: '300px' });
+  if ('IntersectionObserver' in window && cta) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        loadHubspot();
+        observer.disconnect();
+      }
+    }, { rootMargin: '300px' });
 
-      observer.observe(cta);
-    }
-  }, 3000); // 👈 delay crítico
-});
+    observer.observe(cta);
+  }
+}, 6000); // 🔥 SUBE ESTO
 
 /* =========================
    ⚡ SCROLL OPTIMIZADO (SIN LAG)
