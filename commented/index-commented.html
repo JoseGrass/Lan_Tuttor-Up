@@ -20,8 +20,7 @@
   <link rel="canonical" href="https://lan-tuttor-up.vercel.app/">
 
   <!-- 🔥 PRECONNECT SOLO LO NECESARIO -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- 🔥 GOOGLE FONTS OPTIMIZADO -->
   <link rel="preload"
@@ -34,8 +33,7 @@
   </noscript>
 
   <!-- 🔥 CSS NO BLOQUEANTE -->
-  <link rel="preload" href="styles/styles.css" as="style" onload="this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="styles/styles.css"></noscript>
+  <link rel="stylesheet" href="styles/styles.css">
 
 </head>
 
@@ -954,7 +952,7 @@
 <script defer>
 
 /* =========================
-   FAQ
+   FAQ (OK)
 ========================= */
 function toggleFaq(el) {
   const item = el.closest('.faq-item');
@@ -964,14 +962,14 @@ function toggleFaq(el) {
 }
 
 /* =========================
-   🔥 LAZY LOAD HUBSPOT
+   🚀 HUBSPOT ULTRA LAZY (MEJORADO)
 ========================= */
 function loadHubspot() {
   if (window.hubspotLoaded) return;
   window.hubspotLoaded = true;
 
   const s1 = document.createElement("script");
-  s1.src = "https://js.hs-scripts.com/YOUR_PORTAL_ID.js";
+  s1.src = "https://js.hs-scripts.com/51296735.js";
   s1.async = true;
 
   const s2 = document.createElement("script");
@@ -982,47 +980,63 @@ function loadHubspot() {
   document.body.appendChild(s2);
 
   s2.onload = () => {
-    if (typeof hbspt !== 'undefined') {
+    if (window.hbspt) {
       hbspt.forms.create({
         region: "na1",
-        portalId: "YOUR_PORTAL_ID",
-        formId: "YOUR_FORM_ID",
-        target: "#hbspt-cta",
-        onFormReady: function() {
-          const manual = document.getElementById('manual-form');
-          if (manual) manual.style.display = 'none';
-        }
+        portalId: "51296735",
+        formId: "98cd997f-f41b-462b-960c-1bbdf62d3bf1",
+        target: "#hbspt-cta"
       });
     }
   };
 }
 
-/* 👉 cargar al primer click (clave para performance) */
-document.addEventListener("click", loadHubspot, { once: true });
+/* 👉 SOLO cargar cuando el usuario llegue al CTA */
+const cta = document.querySelector('#cta2');
 
-/* =========================
-   SCROLL HEADER
-========================= */
-window.addEventListener('scroll', () => {
-  const h = document.querySelector('header');
-  if (window.scrollY > 60) {
-    h.style.borderBottomColor = 'rgba(0,212,184,0.25)';
-  } else {
-    h.style.borderBottomColor = 'rgba(0,212,184,0.12)';
-  }
-});
-
-/* =========================
-   SMOOTH SCROLL
-========================= */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+if ('IntersectionObserver' in window && cta) {
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      loadHubspot();
+      observer.disconnect();
     }
-  });
+  }, { rootMargin: '200px' });
+
+  observer.observe(cta);
+}
+
+/* =========================
+   ⚡ SCROLL OPTIMIZADO (SIN LAG)
+========================= */
+let ticking = false;
+
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      const h = document.querySelector('header');
+      if (h) {
+        h.style.borderBottomColor = window.scrollY > 60
+          ? 'rgba(0,212,184,0.25)'
+          : 'rgba(0,212,184,0.12)';
+      }
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+
+/* =========================
+   ⚡ SMOOTH SCROLL OPTIMIZADO
+========================= */
+document.addEventListener('click', function(e) {
+  const link = e.target.closest('a[href^="#"]');
+  if (!link) return;
+
+  const target = document.querySelector(link.getAttribute('href'));
+  if (target) {
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 });
 
 </script>
