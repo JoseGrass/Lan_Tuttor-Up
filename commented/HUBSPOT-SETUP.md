@@ -98,7 +98,7 @@ const payload = {
 ```
 
 ### C. Assets/Imágenes
-La imagen `assets/images/Buho.png` se referencia en:
+La imagen `assets/images/Buho.webp` se referencia en:
 - Línea 28: Header logo
 - Línea 58: Hero section (grande)
 - Línea 285: Footer logo
