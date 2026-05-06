@@ -996,9 +996,23 @@ function loadHubspot() {
   document.body.appendChild(s);
 }
 
-/* 🔥 SOLO cuando el usuario interactúa */
-window.addEventListener('touchstart', loadHubspot, { once: true });
-window.addEventListener('click', loadHubspot, { once: true });
+/* 👇 CLAVE: esperar a que TODO esté libre */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const cta = document.querySelector('#cta2');
+
+    if ('IntersectionObserver' in window && cta) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          loadHubspot();
+          observer.disconnect();
+        }
+      }, { rootMargin: '300px' });
+
+      observer.observe(cta);
+    }
+  }, 3000); // 👈 delay crítico
+});
 
 /* =========================
    ⚡ SCROLL OPTIMIZADO (SIN LAG)
