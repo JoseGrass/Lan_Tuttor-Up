@@ -997,9 +997,8 @@ function loadHubspot() {
 }
 
 /* 🔥 SOLO cuando el usuario interactúa */
-['click', 'scroll', 'mousemove', 'touchstart'].forEach(event => {
-  window.addEventListener(event, loadHubspot, { once: true });
-});
+window.addEventListener('touchstart', loadHubspot, { once: true });
+window.addEventListener('click', loadHubspot, { once: true });
 
 /* =========================
    ⚡ SCROLL OPTIMIZADO (SIN LAG)
