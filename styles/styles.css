@@ -901,3 +901,16 @@ footer {
   header.nav-open .nav-actions .btn-teal { width: 100%; }
   header.nav-open .nav-actions .btn-outline { display: inline-flex; }
 }
+@media (max-width: 768px) {
+  .glow-blob,
+  .owl-glow-ring,
+  .fc {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+@media (max-width: 768px) {
+  .hero-bg-logo {
+    display: none;
+  }
+}

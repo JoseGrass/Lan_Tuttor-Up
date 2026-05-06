@@ -1620,3 +1620,17 @@ footer {
 img {
   display: block;
 }
+
+@media (max-width: 768px) {
+  .glow-blob,
+  .owl-glow-ring,
+  .fc {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+@media (max-width: 768px) {
+  .hero-bg-logo {
+    display: none;
+  }
+}
