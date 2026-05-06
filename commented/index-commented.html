@@ -1037,6 +1037,13 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 </script>
-
+<script>
+if (window.innerWidth <= 768) {
+  Object.defineProperty(window, 'contentsquare', {
+    value: null,
+    writable: false
+  });
+}
+</script>
 </body>
 </html>
