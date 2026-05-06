@@ -1053,18 +1053,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 /* =========================
    🛡️ OCULTAR ERRORES EXTERNOS
 ========================= */
-window.addEventListener('error', function(e) {
-  if (
-    e.filename &&
-    (
-      e.filename.includes('hubspot') ||
-      e.filename.includes('contentsquare')
-    )
-  ) {
-    e.preventDefault();
-    return true;
-  }
-});
+
 
 </script>
 </body>
