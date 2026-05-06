@@ -955,8 +955,6 @@ onload="this.media='all'">
 
 
 <!-- ═════════════════════════════════════════════════════════════════════════════════
-     SECCIÓN 11: SCRIPTS (Funcionalidades interactivas)
-     ═════════════════════════════════════════════════════════════════════════════════ -->
 <script defer>
 
 /* =========================
@@ -970,7 +968,7 @@ function toggleFaq(el) {
 }
 
 /* =========================
-   🚀 HUBSPOT ULTRA LAZY (MEJORADO)
+   🚀 HUBSPOT (CARGA INTELIGENTE REAL)
 ========================= */
 let hubspotLoaded = false;
 
@@ -993,19 +991,34 @@ function loadHubspot() {
     }
   };
 
+  // 🔥 CLAVE: evitar error en consola
+  s.onerror = () => {
+    console.warn("HubSpot bloqueado por navegador");
+    const fallback = document.getElementById('manual-form');
+    if (fallback) fallback.style.display = 'block';
+  };
+
   document.body.appendChild(s);
 }
 
-// 🔥 ÚNICA FORMA DE CARGA (tarde)
-setTimeout(() => {
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(loadHubspot);
-  } else {
-    loadHubspot();
-  }
-}, 9000); // 👈 súbelo un poco más
 /* =========================
-   ⚡ SCROLL OPTIMIZADO (SIN LAG)
+   👀 SOLO CARGA CUANDO SE VE EL FORMULARIO
+========================= */
+const formSection = document.querySelector('#cta2');
+
+if (formSection && 'IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      loadHubspot();
+      observer.disconnect();
+    }
+  });
+
+  observer.observe(formSection);
+}
+
+/* =========================
+   ⚡ SCROLL OPTIMIZADO
 ========================= */
 let ticking = false;
 
@@ -1025,7 +1038,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 /* =========================
-   ⚡ SMOOTH SCROLL OPTIMIZADO
+   ⚡ SMOOTH SCROLL
 ========================= */
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', function(e) {
@@ -1036,14 +1049,23 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     }
   });
 });
-</script>
-<script>
-if (window.innerWidth <= 768) {
-  Object.defineProperty(window, 'contentsquare', {
-    value: null,
-    writable: false
-  });
-}
+
+/* =========================
+   🛡️ OCULTAR ERRORES EXTERNOS
+========================= */
+window.addEventListener('error', function(e) {
+  if (
+    e.filename &&
+    (
+      e.filename.includes('hubspot') ||
+      e.filename.includes('contentsquare')
+    )
+  ) {
+    e.preventDefault();
+    return true;
+  }
+});
+
 </script>
 </body>
 </html>
