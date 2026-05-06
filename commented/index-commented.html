@@ -976,27 +976,29 @@ function loadHubspot() {
   if (window.hubspotLoaded) return;
   window.hubspotLoaded = true;
 
-  const s1 = document.createElement("script");
-  s1.src = "https://js.hs-scripts.com/51296735.js";
-  s1.async = true;
+  requestIdleCallback(() => {
+    const s1 = document.createElement("script");
+    s1.src = "https://js.hs-scripts.com/51296735.js";
+    s1.defer = true;
 
-  const s2 = document.createElement("script");
-  s2.src = "https://js.hsforms.net/forms/embed/v2.js";
-  s2.async = true;
+    const s2 = document.createElement("script");
+    s2.src = "https://js.hsforms.net/forms/embed/v2.js";
+    s2.defer = true;
 
-  document.body.appendChild(s1);
-  document.body.appendChild(s2);
+    document.body.appendChild(s1);
+    document.body.appendChild(s2);
 
-  s2.onload = () => {
-    if (window.hbspt) {
-      hbspt.forms.create({
-        region: "na1",
-        portalId: "51296735",
-        formId: "98cd997f-f41b-462b-960c-1bbdf62d3bf1",
-        target: "#hbspt-cta"
-      });
-    }
-  };
+    s2.onload = () => {
+      if (window.hbspt) {
+        hbspt.forms.create({
+          region: "na1",
+          portalId: "51296735",
+          formId: "98cd997f-f41b-462b-960c-1bbdf62d3bf1",
+          target: "#hbspt-cta"
+        });
+      }
+    };
+  });
 }
 
 /* 👉 SOLO cargar cuando el usuario llegue al CTA */
