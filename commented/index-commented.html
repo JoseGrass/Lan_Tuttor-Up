@@ -16,6 +16,7 @@
   <title>Tuttor-Up | La plataforma educativa que te eleva</title>
 
   <!-- SEO -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
   <meta name="description" content="Tuttor-Up es la plataforma #1 de tutorías personalizadas en Colombia. Aprende con expertos 24/7 y mejora tus resultados académicos.">
   <link rel="canonical" href="https://lan-tuttor-up.vercel.app/">
 
@@ -55,7 +56,13 @@
     <!-- Logo + Marca -->
     <a href="#" class="nav-logo">
       <!-- Logo de la marca (búho) -->
-      <img src="assets/images/Buho.webp" alt="Tuttor-Up" class="nav-logo-img">
+      <img src="assets/images/Buho.webp" 
+     alt="Tuttor-Up" 
+     class="nav-logo-img"
+     width="40" 
+     height="40"
+     loading="eager"
+     fetchpriority="high">
       <!-- Texto de marca con color destacado -->
       TUTTOR<span>-UP</span>
     </a>
@@ -995,18 +1002,20 @@ function loadHubspot() {
 }
 
 /* 👉 SOLO cargar cuando el usuario llegue al CTA */
-const cta = document.querySelector('#cta2');
+window.addEventListener('load', () => {
+  const cta = document.querySelector('#cta2');
 
-if ('IntersectionObserver' in window && cta) {
-  const observer = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      loadHubspot();
-      observer.disconnect();
-    }
-  }, { rootMargin: '200px' });
+  if ('IntersectionObserver' in window && cta) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        loadHubspot();
+        observer.disconnect();
+      }
+    }, { rootMargin: '200px' });
 
-  observer.observe(cta);
-}
+    observer.observe(cta);
+  }
+});
 
 /* =========================
    ⚡ SCROLL OPTIMIZADO (SIN LAG)

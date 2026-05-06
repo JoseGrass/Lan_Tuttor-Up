@@ -256,7 +256,7 @@ header.nav-open .nav-toggle span::after { opacity: 0; }
   right: -60px;
   width: 520px;
   height: 520px;
-  background: url('../assets/images/Buho.png') center/contain no-repeat;
+  background: url('../assets/images/Buho.webp') center/contain no-repeat;
   opacity: 0.04;
   pointer-events: none;
   z-index: 0;
@@ -330,7 +330,7 @@ header.nav-open .nav-toggle span::after { opacity: 0; }
   font-size: 5rem;
   animation: owl-float 4s ease-in-out infinite;
   box-shadow: 0 0 40px rgba(0,212,184,0.6), inset 0 0 30px rgba(0,212,184,0.15);
-  background: linear-gradient(135deg, rgba(0,212,184,0.25) 0%, rgba(15,52,96,0.6) 100%), url('../assets/images/Buho.png') center/55% no-repeat;
+  background: linear-gradient(135deg, rgba(0,212,184,0.25) 0%, rgba(15,52,96,0.6) 100%), url('../assets/images/Buho.webp') center/55% no-repeat;
 }
 @keyframes owl-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
 .owl-glow-ring {
@@ -785,7 +785,7 @@ header.nav-open .nav-toggle span::after { opacity: 0; }
   height: 92px;
   margin: 0 auto 1rem;
   display: block;
-  background: url('../assets/images/Buho.png') center/contain no-repeat;
+  background: url('../assets/images/Buho.webp') center/contain no-repeat;
   animation: owl-float 4s ease-in-out infinite;
 }
 .pf-inner h2 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 0.75rem; }
