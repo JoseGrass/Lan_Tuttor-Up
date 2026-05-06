@@ -16,10 +16,12 @@
   <link rel="preconnect" href="https://js.hsforms.net">
 
   <!-- FUENTES OPTIMIZADAS -->
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="preload" href="styles/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="styles/styles.css"></noscript>
 
   <!-- PRELOAD LOGO (mejora LCP) -->
   <link rel="preload" as="image" href="assets/images/Buho.webp">
@@ -70,7 +72,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header>
   <nav>
     <a href="#" class="nav-logo">
-      <img src="assets/images/Buho.png" alt="Tuttor-Up" class="nav-logo-img">
+      <img src="assets/images/Buho.webp" alt="Tuttor-Up" class="nav-logo-img" width="110" height="110" loading="eager" fetchpriority="high">
       TUTTOR<span>-UP</span>
     </a>
 

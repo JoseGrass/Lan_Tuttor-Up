@@ -11,36 +11,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- ═══════════════════════════════════════════════════════════════════
-       META TAGS & CONFIGURACIÓN GENERAL
-       ═══════════════════════════════════════════════════════════════════ -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tuttor-Up | La plataforma educativa que te eleva</title>
-  
-  <!-- Fuentes externas de Google Fonts -->
-  <!-- Barlow Condensed: Títulos grandes y audaces -->
-  <!-- Space Grotesk: Cuerpo de texto y descripción -->
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- ═══════════════════════════════════════════════════════════════════
-       HUBSPOT INTEGRATION
-       IMPORTANTE: Reemplaza YOUR_PORTAL_ID con tu portal ID real
-       ═══════════════════════════════════════════════════════════════════ -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/YOUR_PORTAL_ID.js"></script>
-  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
-
-  <!-- Enlace a la hoja de estilos externa -->
-  <link rel="stylesheet" href="styles/styles.css">
+  <!-- SEO -->
   <meta name="description" content="Tuttor-Up es la plataforma #1 de tutorías personalizadas en Colombia. Aprende con expertos 24/7 y mejora tus resultados académicos.">
-  <meta name="keywords" content="tutorías Colombia, clases particulares, tutor online, matemáticas, física, química">
-  <meta name="author" content="Tuttor-Up">
-  <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://lan-tuttor-up.vercel.app/">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <!-- 🔥 PRECONNECT SOLO LO NECESARIO -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- 🔥 GOOGLE FONTS OPTIMIZADO -->
+  <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Space+Grotesk:wght@400;600&display=swap"
+        as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  </noscript>
+
+  <!-- 🔥 CSS NO BLOQUEANTE -->
+  <link rel="preload" href="styles/styles.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="styles/styles.css"></noscript>
+
 </head>
 
 <body>
@@ -955,129 +951,76 @@
 <!-- ═════════════════════════════════════════════════════════════════════════════════
      SECCIÓN 11: SCRIPTS (Funcionalidades interactivas)
      ═════════════════════════════════════════════════════════════════════════════════ -->
-<script>
+<script defer>
 
-/* ═════════════════════════════════════════════════════════════════════════════════
-   FUNCIÓN 1: TOGGLE FAQ
-   
-   PROPÓSITO: Abrir/cerrar respuestas FAQ al hacer click en preguntas
-   ═════════════════════════════════════════════════════════════════════════════════ */
+/* =========================
+   FAQ
+========================= */
 function toggleFaq(el) {
-  // Obtener el contenedor FAQ más cercano
   const item = el.closest('.faq-item');
-  // Verificar si ya está abierto
   const isOpen = item.classList.contains('open');
-  // Cerrar todos los FAQs abiertos
   document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  // Abrir este FAQ siif no estaba abierto
   if (!isOpen) item.classList.add('open');
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════════
-   FUNCIÓN 2: INICIALIZAR FORMULARIO HUBSPOT
-   
-   PROPÓSITO: Cargar formulario HubSpot embebido en la página
-   IMPORTANTE: Reemplaza YOUR_PORTAL_ID y YOUR_FORM_ID con valores reales
-   ═════════════════════════════════════════════════════════════════════════════════ */
-window.onload = function() {
-  // Verificar si HubSpot está disponible
-  if (typeof hbspt !== 'undefined') {
-    // Crear el formulario
-    hbspt.forms.create({
-      region: "na1",                    // Tu región HubSpot (na1, eu1, etc.)
-      portalId: "YOUR_PORTAL_ID",       // ⚠️ REEMPLAZA CON TU PORTAL ID
-      formId: "YOUR_FORM_ID",           // ⚠️ REEMPLAZA CON TU FORM ID
-      target: "#hbspt-cta",             // Inyectar en este elemento
-      onFormReady: function() {
-        // Si HubSpot cargó, ocultar formulario manual
-        var manual = document.getElementById('manual-form');
-        if (manual) manual.style.display = 'none';
-      }
-    });
-  }
-};
+/* =========================
+   🔥 LAZY LOAD HUBSPOT
+========================= */
+function loadHubspot() {
+  if (window.hubspotLoaded) return;
+  window.hubspotLoaded = true;
 
-/* ═════════════════════════════════════════════════════════════════════════════════
-   FUNCIÓN 3: ENVIAR FORMULARIO MANUAL A HUBSPOT API
-   
-   PROPÓSITO: Si HubSpot form no carga, usar este formulario como fallback
-   Envía datos directamente a HubSpot API
-   ═════════════════════════════════════════════════════════════════════════════════ */
-function submitHubSpot() {
-  // ⚠️ REEMPLAZA ESTOS VALORES CON TUS CREDENCIALES REALES
-  const portalId = 'YOUR_PORTAL_ID';  
-  const formId   = 'YOUR_FORM_ID';    
+  const s1 = document.createElement("script");
+  s1.src = "https://js.hs-scripts.com/YOUR_PORTAL_ID.js";
+  s1.async = true;
 
-  // Construir payload con datos del formulario
-  const payload = {
-    fields: [
-      { name: 'firstname',  value: document.getElementById('f-name').value },
-      { name: 'lastname',   value: document.getElementById('f-last').value },
-      { name: 'email',      value: document.getElementById('f-email').value },
-      { name: 'phone',      value: document.getElementById('f-phone').value },
-      { name: 'jobtitle',   value: document.getElementById('f-role').value },
-      { name: 'subject__tuttorup', value: document.getElementById('f-subject').value }
-    ],
-    context: {
-      pageUri: window.location.href,  // URL actual de la página
-      pageName: document.title         // Título de la página
+  const s2 = document.createElement("script");
+  s2.src = "https://js.hsforms.net/forms/embed/v2.js";
+  s2.async = true;
+
+  document.body.appendChild(s1);
+  document.body.appendChild(s2);
+
+  s2.onload = () => {
+    if (typeof hbspt !== 'undefined') {
+      hbspt.forms.create({
+        region: "na1",
+        portalId: "YOUR_PORTAL_ID",
+        formId: "YOUR_FORM_ID",
+        target: "#hbspt-cta",
+        onFormReady: function() {
+          const manual = document.getElementById('manual-form');
+          if (manual) manual.style.display = 'none';
+        }
+      });
     }
   };
-
-  // Enviar a HubSpot API
-  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  })
-  .then(r => r.json())
-  .then(data => {
-    // SI ÉXITO: Mostrar mensaje de confirmación
-    document.getElementById('manual-form').innerHTML =
-      `<div style="text-align:center;padding:2rem 0;">
-        <div style="font-size:3rem;margin-bottom:1rem;">
-          <img src="assets/images/Buho.png" alt="" style="width:48px;height:48px;object-fit:contain;vertical-align:middle;margin-right:0.35rem;">✅
-        </div>
-        <h3 style="color:var(--teal);font-family:var(--font-disp);font-size:1.8rem;margin-bottom:0.5rem;">¡Listo! Ya eres parte de Tuttor-Up</h3>
-        <p style="color:var(--gray);max-width:400px;margin:0 auto;">Revisa tu correo — te enviaremos el link para tu primera sesión gratis en los próximos minutos.</p>
-      </div>`;
-  })
-  .catch(() => {
-    // SI ERROR: Mostrar alerta
-    alert('Ocurrió un error al enviar el formulario. Por favor intenta de nuevo.');
-  });
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════════
-   FUNCIÓN 4: EFECTO DE HEADER EN SCROLL
-   
-   PROPÓSITO: Cambiar el color del borde del header cuando scrollea
-   Aumenta visibilidad visual cuando el usuario desplaza hacia abajo
-   ═════════════════════════════════════════════════════════════════════════════════ */
-window.addEventListener('scroll', function() {
+/* 👉 cargar al primer click (clave para performance) */
+document.addEventListener("click", loadHubspot, { once: true });
+
+/* =========================
+   SCROLL HEADER
+========================= */
+window.addEventListener('scroll', () => {
   const h = document.querySelector('header');
-  // Si desplazamiento > 60px: color más brillante
   if (window.scrollY > 60) {
     h.style.borderBottomColor = 'rgba(0,212,184,0.25)';
   } else {
-    // Si no: color más tenue
     h.style.borderBottomColor = 'rgba(0,212,184,0.12)';
   }
 });
 
-/* ═════════════════════════════════════════════════════════════════════════════════
-   FUNCIÓN 5: SMOOTH SCROLL PARA LINKS INTERNOS
-   
-   PROPÓSITO: Animar el movimiento hacia cualquier sección de la página
-   Mejora la experiencia de navegación
-   ═════════════════════════════════════════════════════════════════════════════════ */
+/* =========================
+   SMOOTH SCROLL
+========================= */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
-    e.preventDefault();  // Prevenir salto abrupt
+    e.preventDefault();
     const target = document.querySelector(a.getAttribute('href'));
     if (target) {
-      // Desplazamiento suave (smooth) hacia el target
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: 'smooth' });
     }
   });
 });
